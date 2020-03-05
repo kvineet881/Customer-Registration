@@ -13,33 +13,49 @@ import java.util.Optional;
 public class CustomerController {
     @Autowired
     CustomerService customerService;
-    @GetMapping("/hello")
-    public String sayHello()
-    {
-        return "Welcome in Spring Boot";
-    }
 
     @GetMapping("/getAllCustomer")
-    public List<Customer> getAllCustomer()
-    {
-     return customerService.getAllCustomer();
+    public List<Customer> getAllCustomer() {
+        return customerService.getAllCustomer();
     }
+
     @GetMapping("/getCustomerById")
-    public Optional<Customer> getCustomerById(@RequestParam("id") int id)
-    {
+    public Optional<Customer> getCustomerById(@RequestParam("id") int id) {
         return customerService.getCustomerById(id);
     }
 
+    @GetMapping("/getCustomerByLastName")
+    public List<Customer> getCustomerByLastName(@RequestParam("lastName") String lastName) {
+        return customerService.getCustomerByLastName(lastName);
+    }
 
-    @DeleteMapping("/deleteCustomerById")
-    public int deleteCustomerById(@RequestParam("id") int id,Customer customer)
-    {
-        customerService.deleteCustomerById(id);
-        return customer.getCustomerId();
+    @GetMapping("/getCustomerByFirstName")
+    public List<Customer> getCustomerByFirstName(@RequestParam("firstName") String firstName) {
+        return customerService.getCustomerByFirstName(firstName);
+    }
+
+    @GetMapping("/findCustomerContainingMobile")
+    public List<Customer> findCustomerContainingMobile(@RequestParam("mobile") String mobile) {
+        return customerService.findCustomerContainingMobile(mobile);
+    }
+
+    @GetMapping("/findCustomerContainingEmial")
+    public List<Customer> findCustomerContainingEmial(@RequestParam("email") String email) {
+        return customerService.findCustomerContainingEmial(email);
+    }
+
+    @GetMapping("/findCustomerByCity")
+    public List<Customer> findCustomerByCity(@RequestParam("city") String city) {
+        return customerService.findCustomerByCity(city);
+    }
+
+    @GetMapping("/getCustomerByCityOrderByCustomerIdDesc")
+    List<Customer> getCustomerByCityOrderByCustomerIdDesc(@RequestParam("city") String city) {
+        return customerService.getCustomerByCityOrderByCustomerIdDesc(city);
     }
 
     @PostMapping("/createCustomer")
-   public int saveCustomer(@RequestBody Customer customer) {
+    public int saveCustomer(@RequestBody Customer customer) {
         customerService.saveOrUpdate(customer);
         return customer.getCustomerId();
     }
@@ -49,13 +65,17 @@ public class CustomerController {
         return customerService.updateCustomer(customer, id);
     }
 
-    @DeleteMapping("/deleteAllCustomer")
-    public void deleteAllcustomer()
-    {
-        customerService.deleteAllcustomer();
+    @DeleteMapping("/deleteCustomerById")
+    public int deleteCustomerById(@RequestParam("id") int id, Customer customer) {
+        customerService.deleteCustomerById(id);
+        return customer.getCustomerId();
     }
 
+    @DeleteMapping("/deleteAllCustomer")
+    public void deleteAllcustomer() {
 
+        customerService.deleteAllcustomer();
+    }
 
 
 }

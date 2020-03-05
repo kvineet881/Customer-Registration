@@ -2,13 +2,14 @@ package com.edusol.banking.app.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
+//@NamedNativeQuery(name="getCustomerByLastName",
+//  query="select * From Customer c where c.lastName = :lastName",
+// resultClass = Customer.class)
+
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

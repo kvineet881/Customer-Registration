@@ -16,7 +16,7 @@ public class CustomerService {
 
     public List<Customer> getAllCustomer() {
         List<Customer> customers = new ArrayList<>();
-        customerRepository.findAll().forEach(customer-> customers.add(customer));
+        customerRepository.findAll().forEach(customer -> customers.add(customer));
         return customers;
     }
 
@@ -57,8 +57,31 @@ public class CustomerService {
         customerRepository.deleteAll();
     }
 
-    public void deleteCustomerbyName(Customer customer)
-    {
+    public void deleteCustomerbyName(Customer customer) {
         customerRepository.delete(customer);
+    }
+
+    public List<Customer> getCustomerByLastName(String lastName) {
+        return customerRepository.findByLastNameContainingIgnoreCase(lastName);
+    }
+
+    public List<Customer> getCustomerByFirstName(String firstName) {
+        return customerRepository.findCustomerByFirstName(firstName);
+    }
+
+    public List<Customer> findCustomerContainingMobile(String mobile) {
+        return customerRepository.findCustomerContainingMobile(mobile);
+    }
+
+    public List<Customer> findCustomerContainingEmial(String email) {
+        return customerRepository.findCustomerContainingEmial(email);
+    }
+
+    public List<Customer> findCustomerByCity(String city) {
+        return customerRepository.findCustomerByCity(city);
+    }
+
+    public List<Customer> getCustomerByCityOrderByCustomerIdDesc(String city) {
+        return customerRepository.getCustomerByCityOrderByCustomerIdDesc(city);
     }
 }
